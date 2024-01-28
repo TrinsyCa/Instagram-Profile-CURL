@@ -1,8 +1,12 @@
 <?php
 
-    $post = "https://www.instagram.com/p/C1hEoGAs2cn/";
+    // Instagram (Gönderi veya Reels) Linkini Tırnakların İçerisine Ekle
 
-    $parsedUrl = parse_url($post);
+    $post = "        https://www.instagram.com/p/C2nCdgchArD/        ";
+    
+    // Instagram (Gönderi veya Reels) Linkini Tırnakların İçerisine Ekle
+
+    $parsedUrl = parse_url(trim($post));
 
     $scheme = $parsedUrl['scheme']."://";
     $host = $parsedUrl['host'];
@@ -13,7 +17,7 @@
 
     $post = $scheme.$host.$post_path;
 
-    echo "Link: ".$post."<br><br><br>";
+    echo "Eklediğin Link: ".$post."<br><br><br>";
 
     $ch = curl_init();
     curl_setopt_array($ch, [
@@ -56,11 +60,33 @@
             }
             if(isset($result[3]))
             {
-                $followers .= $result[3] . " <br><br>(Tam takipçiyi görmek için lütfen reels yerine gönderi bağlantısı ekle)";
+                $followers .= $result[3] . " <br><br>(Onaylı IG hesaplarının tam takipçisini görmek için reels yerine gönderi bağlantısı ekle)";
             }
         }
     }
-    echo $posts."<br>";
-    echo $followers;
 
+    /* preg_match('@{\\\"posts_count\\\":([0-9]+)}@i',$output,$result);
+    print_r($result);
+    if($result[1])
+    {
+        $posts = number_format($result[1],0,",");
+    } */
+
+    if($posts <= 0) { echo "Gönderi: Şu anda sadece reels bağlantılarında çalışıyor"; } 
+    else { echo "Gönderi: ".$posts; }
+    echo "<br>";
+    echo "Takipçi: ".$followers;
 ?>
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-black">
+    
+</body>
+</html>
